@@ -1,0 +1,10 @@
+[package]
+name = "issue"
+version = "0.1.0"
+authors = ["Mikko Rantanen <jubjub@jubjubnest.net>"]
+
+[lib]
+name = "issue"
+plugin = true
+
+[dependencies]
