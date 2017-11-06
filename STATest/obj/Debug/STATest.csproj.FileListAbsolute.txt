@@ -1,0 +1,9 @@
+C:\Dev\Projects\rust-com\STATest\bin\Debug\STATest.dll.config
+C:\Dev\Projects\rust-com\STATest\bin\Debug\STATest.dll
+C:\Dev\Projects\rust-com\STATest\bin\Debug\STATest.pdb
+C:\Dev\Projects\rust-com\STATest\bin\Debug\nunit.framework.dll
+C:\Dev\Projects\rust-com\STATest\bin\Debug\nunit.framework.xml
+C:\Dev\Projects\rust-com\STATest\obj\Debug\STATest.csprojResolveAssemblyReference.cache
+C:\Dev\Projects\rust-com\STATest\obj\Debug\STATest.csproj.CoreCompileInputs.cache
+C:\Dev\Projects\rust-com\STATest\obj\Debug\STATest.dll
+C:\Dev\Projects\rust-com\STATest\obj\Debug\STATest.pdb
