@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -15,10 +16,10 @@ namespace STATest
 	[TestFixture]
 	class Test
 	{
-		[Test]
+		[Test, Apartment(ApartmentState.STA)]
 		public void DoTest()
 		{
-			Assert.IsTrue( true );
+			Assert.AreEqual( ApartmentState.STA, Thread.CurrentThread.GetApartmentState() );
 		}
 	}
 }
