@@ -3,6 +3,9 @@ mod common;
 mod com_class;
 pub use self::com_class::expand_com_class;
 
+mod com_struct;
+pub use self::com_struct::expand_com_struct;
+
 mod com_interface;
 pub use self::com_interface::expand_com_interface;
 
