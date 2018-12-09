@@ -27,6 +27,12 @@ fn get_intercom_interface_info_for_Foo() -> Vec<intercom::typelib::TypeInfo> {
     unsafe { MaybeUninit::uninit().assume_init() }
 }
 
+#[com_struct]
+pub struct PlainStruct
+{
+    field: u32
+}
+
 #[com_class( clsid = "{00000000-0000-0000-0000-000000000000}", Foo)]
 pub struct Foo;
 
@@ -44,6 +50,8 @@ impl Foo
 
     fn string_method(&self, input : String) -> String { input }
     fn string_result_method(&self, input : String) -> ComResult<String> { Ok(input) }
+
+    fn struct_method(&self, input: PlainStruct ) -> PlainStruct { PlainStruct { field: 0 } }
 
     fn complete_method(&mut self, a: u16, b: i16) -> ComResult<bool>
     {
