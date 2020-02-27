@@ -23,6 +23,7 @@ ${PROJECT_SOURCE_DIR}/strings.cpp
 ${PROJECT_SOURCE_DIR}/type_system_callbacks.cpp
 ${PROJECT_SOURCE_DIR}/variant.cpp
 ${PROJECT_SOURCE_DIR}/nullable_parameters.cpp
+${PROJECT_SOURCE_DIR}/structs.cpp
 ${PROJECT_SOURCE_DIR}/output_memory.cpp
 ${PROJECT_SOURCE_DIR}/only_interface.cpp
 )

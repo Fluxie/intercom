@@ -10,6 +10,7 @@ pub enum LibraryItemType
     Module(Path),
     Class(Path),
     Interface(Path),
+    Struct(Path),
 }
 
 impl syn::parse::Parse for LibraryItemType
@@ -21,8 +22,9 @@ impl syn::parse::Parse for LibraryItemType
             "module" => Ok(LibraryItemType::Module(input.parse()?)),
             "class" => Ok(LibraryItemType::Class(input.parse()?)),
             "interface" => Ok(LibraryItemType::Interface(input.parse()?)),
+            "user_type" => Ok(LibraryItemType::Struct(input.parse()?)),
             _ => Err(input.error(&format!(
-                "Expected 'class', 'interface' or 'module', found {}",
+                "Expected 'class', 'interface', user_type', or 'module', found {}",
                 ident
             ))),
         }
@@ -46,6 +48,7 @@ pub struct ComLibrary
     pub coclasses: Vec<Path>,
     pub interfaces: Vec<Path>,
     pub submodules: Vec<Path>,
+    pub structs: Vec<Path>,
 }
 
 impl ComLibrary
@@ -54,7 +57,7 @@ impl ComLibrary
     pub fn parse(crate_name: &str, attr_params: TokenStream) -> ParseResult<ComLibrary>
     {
         let attr: ComLibraryAttr = ::syn::parse2(attr_params)
-            .map_err(|_| ParseError::ComLibrary("Attribute syntax error".into()))?;
+            .map_err(|e| ParseError::ComLibrary(format!("Attribute syntax error: {}", e)))?;
 
         // The first parameter is the LIBID of the library.
         let libid = match attr.libid().map_err(ParseError::ComLibrary)? {
@@ -67,11 +70,13 @@ impl ComLibrary
         let mut coclasses = vec![];
         let mut interfaces = vec![];
         let mut submodules = vec![];
+        let mut structs = vec![];
         for arg in attr.args().into_iter().cloned() {
             match arg {
                 LibraryItemType::Class(cls) => coclasses.push(cls),
                 LibraryItemType::Interface(cls) => interfaces.push(cls),
                 LibraryItemType::Module(cls) => submodules.push(cls),
+                LibraryItemType::Struct(cls) => structs.push(cls),
             }
         }
 
@@ -80,6 +85,7 @@ impl ComLibrary
             on_load,
             coclasses,
             interfaces,
+            structs,
             submodules,
             libid,
         })

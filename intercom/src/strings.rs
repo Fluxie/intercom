@@ -770,6 +770,15 @@ unsafe impl ExternInput<RawTypeSystem> for CString
     {
         log::trace!("CString::into_foreign_parameter<Raw>");
         Ok((self.as_ptr() as *mut _, self))
+
+impl IntercomFrom<CString> for *mut c_char
+{
+    unsafe fn intercom_from(source: CString) -> ComResult<Self>
+    {
+        // FIXME: These should be allocated with the intercom allocator.
+        let ptr = source.as_ptr();
+        std::mem::forget(source);
+        Ok(ptr as _)
     }
 
     type Owned = Self;

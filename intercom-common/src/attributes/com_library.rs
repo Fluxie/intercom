@@ -173,6 +173,11 @@ fn create_gather_module_types(lib: &model::ComLibrary) -> Result<TokenStream, St
         .submodules
         .iter()
         .map(|path| quote!( #path::__gather_module_types()));
+    let create_struct_typeinfo = lib.structs.iter().map(|path| {
+        quote!(
+            <#path as intercom::attributes::StructHasTypeInfo>::gather_type_info()
+        )
+    });
     Ok(quote!(
         pub fn __gather_module_types() -> Vec<intercom::typelib::TypeInfo>
         {
@@ -180,6 +185,7 @@ fn create_gather_module_types(lib: &model::ComLibrary) -> Result<TokenStream, St
                 #( #create_class_typeinfo, )*
                 #( #gather_submodule_types, )*
                 #( #create_interface_typeinfo, )*
+                #( #create_struct_typeinfo, )*
             ]
             .into_iter()
             .flatten()

@@ -16,6 +16,7 @@ pub mod result;
 pub mod return_interfaces;
 pub mod stateful;
 pub mod strings;
+pub mod struct_parameters;
 pub mod type_system_callbacks;
 pub mod unicode;
 pub mod variant;
@@ -26,6 +27,9 @@ com_library! {
     module nullable_parameters,
 
     class primitive::PrimitiveOperations,
+    class return_interfaces::RefCountOperations,
+    class return_interfaces::ClassCreator,
+    class return_interfaces::CreatedClass,
     class stateful::StatefulOperations,
     class result::ResultOperations,
     class interface_params::SharedImplementation,
@@ -42,6 +46,12 @@ com_library! {
 
     // Ensure exporting interfaces that would otherwise be included as well
     // does not cause problem.
+
+    class struct_parameters::StructParameterTests,
+    user_type struct_parameters::BasicStruct,
+    user_type struct_parameters::StringStruct,
+    user_type struct_parameters::Rectangle,
+    user_type struct_parameters::Point,
     interface interface_params::ISharedInterface,
 }
 

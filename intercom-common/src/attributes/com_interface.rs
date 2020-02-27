@@ -12,8 +12,6 @@ use crate::utils;
 
 use syn::spanned::Spanned;
 
-extern crate proc_macro;
-
 /// Interface level output.
 #[derive(Default)]
 struct InterfaceOutput
@@ -233,7 +231,7 @@ pub fn expand_com_interface(
         model::ParseError::ComInterface(itf_path.get_some_ident().unwrap().to_string(), e)
     })?);
 
-    Ok(tokens_to_tokenstream(item_tokens, output))
+    u
 }
 
 /// Processes the interface type system variant.
