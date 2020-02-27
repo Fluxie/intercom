@@ -134,6 +134,8 @@ impl TypeHandler
             syn::Type::Reference(..) => quote!(&),
             _ => quote!(),
         };
+            _ => quote!(),
+        };
         match dir {
             Direction::In => quote_spanned!(span=>
                     #maybe_ref <#ty as intercom::type_system::ExternInput<#ts>>

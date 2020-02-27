@@ -106,20 +106,18 @@ pub fn com_class(attr: TokenStream, tokens: TokenStream) -> TokenStream
     }
 }
 
-/// Defines a COM struct that can be used to pass structured values between Rust on COM.
+/// Defines a COM struct that can be used as a parameter in COM methods.
 ///
 /// ```rust,ignore
-/// #[com_class()]
-/// struct S { /* ... */ }
+/// #[com_struct]
+/// struct Data { /* ... */ }
+/// ```
 #[proc_macro_attribute]
-pub fn com_struct(
-    attr: TokenStream,
-    tokens: TokenStream,
-) -> TokenStream
+pub fn com_struct(attr: TokenStream, tokens: TokenStream) -> TokenStream
 {
-    match expand_com_struct( attr, tokens ) {
+    match expand_com_struct(attr, tokens) {
         Ok(t) => t,
-        Err(e) => panic!( "{}", e ),
+        Err(e) => panic!("{}", e),
     }
 }
 

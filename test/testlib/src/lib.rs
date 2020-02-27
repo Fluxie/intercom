@@ -14,24 +14,31 @@ pub mod result;
 pub mod return_interfaces;
 pub mod stateful;
 pub mod strings;
+pub mod struct_parameters;
 pub mod type_system_callbacks;
 pub mod unicode;
 pub mod variant;
 
 // Declare available COM classes.
 com_library!(
-    primitive::PrimitiveOperations,
-    return_interfaces::RefCountOperations,
-    return_interfaces::ClassCreator,
-    return_interfaces::CreatedClass,
-    stateful::StatefulOperations,
-    result::ResultOperations,
-    interface_params::SharedImplementation,
-    error_info::ErrorTests,
-    alloc::AllocTests,
-    strings::StringTests,
-    type_system_callbacks::TypeSystemCaller,
-    variant::VariantTests,
-    variant::VariantImpl,
-    unicode::UnicodeConversion,
+    class primitive::PrimitiveOperations,
+    class return_interfaces::RefCountOperations,
+    class return_interfaces::ClassCreator,
+    class return_interfaces::CreatedClass,
+    class stateful::StatefulOperations,
+    class result::ResultOperations,
+    class interface_params::SharedImplementation,
+    class error_info::ErrorTests,
+    class alloc::AllocTests,
+    class strings::StringTests,
+    class type_system_callbacks::TypeSystemCaller,
+    class variant::VariantTests,
+    class variant::VariantImpl,
+    class unicode::UnicodeConversion,
+
+    class struct_parameters::StructParameterTests,
+    user_type struct_parameters::BasicStruct,
+    user_type struct_parameters::StringStruct,
+    user_type struct_parameters::Rectangle,
+    user_type struct_parameters::Point,
 );
