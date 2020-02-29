@@ -1,4 +1,3 @@
-#[inline(always)]
 #[allow(unused_variables)]
 pub fn trace<FArgs>(f: FArgs)
 where
@@ -18,7 +17,6 @@ where
     }
 }
 
-#[inline(always)]
 #[allow(unused_variables)]
 pub fn error<FArgs>(f: FArgs)
 where

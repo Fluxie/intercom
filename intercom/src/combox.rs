@@ -222,7 +222,7 @@ impl<T: ComClass> ComBoxData<T>
     pub unsafe fn add_ref(this: &Self) -> u32
     {
         let previous_value = this.ref_count.fetch_add(1, Ordering::Relaxed);
-        (previous_value + 1)
+        previous_value + 1
     }
 
     /// Gets the reference count of the object.
@@ -364,7 +364,6 @@ impl<T: ComClass> ComBoxData<T>
     /// The reference may be used to further get references to the various
     /// VTableList fields to resolve offset values between the various VTable
     /// pointers and the actual `ComBoxData` containing these pointers.
-    #[inline]
     pub unsafe fn null_vtable() -> &'static T::VTableList
     {
         let null_combox = std::ptr::null() as *const ComBoxData<T>;
