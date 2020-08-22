@@ -1,4 +1,5 @@
 #![crate_type = "dylib"]
+#![allow(clippy::match_bool)]
 
 extern crate intercom;
 use intercom::*;
@@ -9,6 +10,7 @@ pub mod alloc;
 pub mod error_info;
 pub mod interface_params;
 pub mod nullable_parameters;
+pub mod output_memory;
 pub mod primitive;
 pub mod result;
 pub mod return_interfaces;
@@ -34,4 +36,17 @@ com_library! {
     class variant::VariantTests,
     class variant::VariantImpl,
     class unicode::UnicodeConversion,
+    class output_memory::OutputMemoryTests,
+
+    interface IOnlyInterface,
+
+    // Ensure exporting interfaces that would otherwise be included as well
+    // does not cause problem.
+    interface interface_params::ISharedInterface,
+}
+
+#[com_interface]
+pub trait IOnlyInterface
+{
+    fn method(&self) -> ComResult<u32>;
 }
